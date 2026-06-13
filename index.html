@@ -229,6 +229,22 @@ body{font-family:'Lato','Segoe UI','Helvetica Neue',Arial,sans-serif;
 .ls-close{margin-left:auto;flex-shrink:0;background:none;border:none;
   color:var(--smm);cursor:pointer;font-size:14px;padding:2px 6px;transition:color .2s;}
 .ls-close:hover{color:var(--sm);}
+.lib-search{max-width:1200px;margin:18px auto 0;padding:0 36px;}
+.lq-box{display:flex;align-items:center;gap:9px;padding:0 13px;
+  background:var(--s1);border:1px solid var(--sb);border-radius:8px;
+  transition:border-color .2s,box-shadow .2s;}
+.lq-box:focus-within{border-color:rgba(201,168,92,.5);box-shadow:0 0 0 3px rgba(201,168,92,.06);}
+.lq-ico{display:flex;color:var(--sm);flex-shrink:0;transition:color .2s;}
+.lq-box:focus-within .lq-ico{color:var(--g1);}
+#lib-q{flex:1;min-width:0;background:none;border:none;outline:none;
+  padding:12px 0;color:var(--st);font-size:13.5px;font-family:inherit;}
+#lib-q::placeholder{color:var(--sm);opacity:.6;}
+.lq-clear{flex-shrink:0;width:24px;height:24px;border-radius:50%;border:none;
+  background:var(--s3);color:var(--sm);font-size:11px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.lq-clear:hover{background:var(--sb);color:var(--st);}
+.search-meta{font-size:11px;color:var(--sm);letter-spacing:.02em;margin-bottom:18px;}
+.search-meta em{color:var(--g1);font-style:normal;font-weight:600;}
 .lib-body{padding:28px 36px 60px;max-width:1200px;margin:0 auto;}
 .sec-lbl{font-size:8.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
   color:var(--sm);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
@@ -596,136 +612,50 @@ body{font-family:'Lato','Segoe UI','Helvetica Neue',Arial,sans-serif;
   pointer-events:none;z-index:2501;display:none;}
 #hk-badge.show{display:block;animation:ba .7s ease both;}
 /* ═══════════════════════════════════════
-   MOBILE  ·  controls hidden on desktop,
-   revealed when body.is-mobile is set
+   MOBILE  ·  READ-ONLY VIEWER
+   Phones browse, search & read documents.
+   All editing chrome is removed.
 ═══════════════════════════════════════ */
-.m-menu-btn,.m-lib-menu-btn,.m-fab{display:none;}
-
-.m-menu-btn{height:100%;width:50px;border:none;border-left:1px solid var(--sb);
-  background:none;color:var(--sm);font-size:22px;line-height:1;cursor:pointer;flex-shrink:0;}
-.m-menu-btn:active{background:var(--gw);color:var(--g1);}
-.m-lib-menu-btn{width:42px;height:38px;border-radius:6px;border:1px solid var(--sb);
-  background:var(--s2);color:var(--st);font-size:20px;line-height:1;cursor:pointer;flex-shrink:0;}
-
-/* ── Keyboard color rail (the mobile signature) ── */
-#kb-rail{position:fixed;left:0;right:0;bottom:0;z-index:2400;display:none;
-  background:rgba(8,13,10,.86);
-  -webkit-backdrop-filter:blur(20px) saturate(1.4);backdrop-filter:blur(20px) saturate(1.4);
-  border-top:1px solid rgba(201,168,92,.22);
-  box-shadow:0 -10px 40px rgba(0,0,0,.55);
-  padding-bottom:env(safe-area-inset-bottom);
-  transition:transform .22s cubic-bezier(.22,.8,.36,1),opacity .18s;
-  transform:translateY(130%);opacity:0;will-change:transform;}
-#kb-rail.show{transform:translateY(0);opacity:1;}
-.kb-scroll{display:flex;align-items:center;gap:7px;padding:9px 12px;
-  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-.kb-scroll::-webkit-scrollbar{display:none;}
-.kb-type{display:flex;align-items:center;gap:7px;flex-shrink:0;height:38px;padding:0 14px;
-  border-radius:19px;background:var(--s2);border:1px solid var(--sb);color:var(--st);
-  font-family:inherit;font-size:13px;cursor:pointer;white-space:nowrap;
-  transition:border-color .15s,background .15s,transform .08s;}
-.kb-type:active{transform:scale(.95);}
-.kb-type.on{border-color:var(--g1);background:var(--gw2);color:var(--g2);font-weight:700;
-  box-shadow:0 0 0 1px rgba(201,168,92,.3),0 2px 12px rgba(201,168,92,.18);}
-.kb-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0;}
-.kb-type.on .kb-dot{box-shadow:0 0 7px currentColor;}
-.kb-div{width:1px;height:24px;background:var(--sb);flex-shrink:0;margin:0 3px;}
-.kb-act{flex-shrink:0;min-width:38px;height:38px;padding:0 11px;border-radius:10px;
-  background:var(--s2);border:1px solid var(--sb);color:var(--sm);
-  font-family:inherit;font-size:16px;line-height:1;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:transform .08s,background .15s,color .15s,border-color .15s;}
-.kb-act:active{transform:scale(.92);background:var(--s3);}
-.kb-del:active{border-color:var(--sr-over);color:var(--sr-over);}
-.kb-done{font-size:13px;color:var(--g1);border-color:rgba(201,168,92,.3);background:var(--gw);font-weight:700;}
-
-/* ── Bottom sheets ── */
-.sheet-wrap{position:fixed;inset:0;z-index:2600;display:flex;align-items:flex-end;
-  background:rgba(0,0,0,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);
-  opacity:0;pointer-events:none;transition:opacity .25s;}
-.sheet-wrap.open{opacity:1;pointer-events:auto;}
-.sheet{width:100%;max-height:88vh;overflow-y:auto;
-  background:linear-gradient(180deg,#13201A 0%,#0A120D 100%);
-  border-top:1px solid var(--sb);border-radius:20px 20px 0 0;
-  box-shadow:0 -20px 60px rgba(0,0,0,.7);
-  padding:10px 18px calc(18px + env(safe-area-inset-bottom));
-  transform:translateY(100%);transition:transform .3s cubic-bezier(.22,.9,.34,1);}
-.sheet-wrap.open .sheet{transform:translateY(0);}
-.sheet-grip{width:38px;height:4px;border-radius:2px;background:var(--sb);margin:6px auto 14px;}
-.sheet-title{font-family:'Playfair Display',Georgia,serif;font-style:italic;
-  font-size:17px;color:var(--st);margin-bottom:14px;padding:0 4px;}
-.sheet-sec-lbl{font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--sm);margin:18px 4px 9px;}
-.sheet-row{display:flex;align-items:center;gap:14px;width:100%;text-align:left;
-  padding:14px;margin-bottom:8px;border-radius:12px;background:var(--s2);
-  border:1px solid var(--sb);color:var(--st);font-family:inherit;font-size:15px;
-  cursor:pointer;transition:background .15s,border-color .15s;}
-.sheet-row:active{background:var(--s3);border-color:rgba(201,168,92,.3);}
-.sheet-row.gold{background:linear-gradient(135deg,rgba(201,168,92,.16),rgba(201,168,92,.06));border-color:rgba(201,168,92,.35);}
-.sheet-ico{font-size:18px;width:24px;text-align:center;color:var(--g1);flex-shrink:0;}
-.sheet-lbl{flex:1;display:flex;flex-direction:column;gap:2px;line-height:1.25;}
-.sheet-sub{font-size:11px;color:var(--sm);}
-.sheet-chev{color:var(--smm);font-size:20px;flex-shrink:0;}
-.seg{display:flex;gap:7px;}
-.seg-btn{flex:1;padding:13px;border-radius:11px;background:var(--s2);border:1px solid var(--sb);
-  color:var(--sm);font-family:inherit;font-size:14px;cursor:pointer;transition:all .15s;}
-.seg-btn.on{background:var(--gw2);border-color:var(--g1);color:var(--g2);font-weight:700;}
-.sheet-pg{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;
-  padding:13px 14px;background:var(--s2);border:1px solid var(--sb);border-radius:11px;}
-.sheet-pg-lbl{font-size:14px;color:var(--st);}
-.sheet-pg input{width:84px;padding:10px;border-radius:8px;background:var(--s1);border:1px solid var(--sb);
-  color:var(--st);font-family:'Courier New',monospace;font-size:17px;font-weight:600;text-align:center;outline:none;}
-.sheet-pg input:focus{border-color:var(--g1);}
-.sheet-close{width:100%;margin-top:14px;padding:14px;border-radius:12px;background:none;
-  border:1px solid var(--sb);color:var(--sm);font-family:inherit;font-size:15px;cursor:pointer;}
-.sheet-close:active{background:var(--s2);}
-
-/* ── New-document FAB ── */
-.m-fab{position:fixed;right:18px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:30;
-  width:58px;height:58px;border-radius:50%;border:none;
-  background:linear-gradient(135deg,var(--g2),var(--g3));color:#060B07;
-  font-size:30px;line-height:1;font-weight:300;cursor:pointer;
-  box-shadow:0 8px 28px rgba(201,168,92,.4),0 2px 6px rgba(0,0,0,.4);transition:transform .15s;}
-.m-fab:active{transform:scale(.9);}
-
-/* ═══ Layout switches when phone mode is active ═══ */
-body.is-mobile .m-menu-btn,
-body.is-mobile .m-lib-menu-btn,
-body.is-mobile .m-fab{display:flex;align-items:center;justify-content:center;}
-body.is-mobile #kb-rail{display:block;}
-
 body.is-mobile .sidebar{display:none;}
 body.is-mobile .btn-tags,
-body.is-mobile .btn-review{display:none;}
-body.is-mobile .save-pill{padding:0 12px;}
-body.is-mobile .save-pill #save-lbl{display:none;}
-body.is-mobile .edt-back{padding:0 14px;font-size:0;}
-body.is-mobile .edt-back::before{content:'←';font-size:19px;color:inherit;}
-body.is-mobile .edt-name{font-size:13px;padding:0 12px;}
+body.is-mobile .btn-review,
+body.is-mobile .save-pill{display:none;}
+body.is-mobile .edt-back{padding:0 16px;font-size:0;}
+body.is-mobile .edt-back::before{content:'←';font-size:20px;color:inherit;}
+body.is-mobile .edt-name{font-size:14px;padding:0 14px;}
 
+/* Library */
 body.is-mobile .lib-head{padding:13px 16px;}
 body.is-mobile .lib-acts .btn-icon,
 body.is-mobile #btn-new-doc{display:none;}
-body.is-mobile .lib-body{padding:18px 16px 120px;}
+body.is-mobile .lib-body{padding:18px 16px 56px;}
+body.is-mobile .lib-search{padding:0 16px;}
 body.is-mobile .cards-grid{grid-template-columns:1fr;}
 body.is-mobile .ls-warn{padding:9px 16px;font-size:11px;}
+body.is-mobile .card-del{display:none;}                       /* no deleting */
+body.is-mobile .card-open{pointer-events:none;color:var(--sm);} /* tap card to open */
 
-body.is-mobile .preview{padding:14px 12px 42vh;background-size:22px 22px;}
+/* Reader (read-only document view) */
+body.is-mobile .preview{padding:14px 12px 48px;background-size:22px 22px;}
 body.is-mobile .pages-cnt{width:100%;gap:18px;}
 body.is-mobile .a4{width:100%;padding:30px 20px 26px;
   box-shadow:0 6px 22px rgba(0,0,0,.4),0 1px 0 rgba(0,0,0,.3);}
 body.is-mobile .page-body,
-body.is-mobile .a4:not([data-page="1"]) .page-body{min-height:180px;}
+body.is-mobile .a4:not([data-page="1"]) .page-body{min-height:120px;}
+body.is-mobile .page-body.empty::before{display:none;}
 body.is-mobile .orn{width:82%;}
 body.is-mobile .rule-svg{height:14px;}
 body.is-mobile .doc-title{font-size:22px;}
-body.is-mobile .block-text{font-size:16px;line-height:1.85;padding:11px 16px;}
+body.is-mobile .doc-title,
+body.is-mobile .doc-meta{cursor:default;border-bottom-color:transparent!important;}
+body.is-mobile .block-text{font-size:16px;line-height:1.85;padding:11px 16px;cursor:default;}
 body.is-mobile .block[data-type=ayah] .block-text,
 body.is-mobile .block[data-type=hadith] .block-text{font-size:18px;line-height:2;}
 body.is-mobile .block-tools{display:none!important;}
-body.is-mobile .block.focused{box-shadow:0 0 0 2px rgba(58,104,64,.4);}
-body.is-mobile .block{scroll-margin-bottom:120px;}
-body.is-mobile .bar{width:6px;}
-body.is-mobile .toast{left:16px;right:16px;bottom:calc(90px + env(safe-area-inset-bottom));text-align:center;}
+body.is-mobile .block.focused{box-shadow:none;}
+body.is-mobile .bar{width:6px;pointer-events:none;cursor:default;}      /* no type cycling */
+body.is-mobile [contenteditable="false"][data-ph]:empty::before{content:'';}
+body.is-mobile .toast{left:16px;right:16px;bottom:calc(20px + env(safe-area-inset-bottom));text-align:center;}
 body.is-mobile #hk-badge{display:none!important;}
 
 /* Smaller phones: 2×2 ratings, full-bleed onboarding */
@@ -822,8 +752,20 @@ body.is-mobile #hk-badge{display:none!important;}
       <button class="btn-icon" id="btn-export">⬇ Export Backup</button>
       <button class="btn-icon" id="btn-import">⬆ Import Backup</button>
       <button class="btn-icon" id="btn-about">◈ About</button>
-      <button class="m-lib-menu-btn" id="m-lib-menu" aria-label="Library options">⋯</button>
       <button class="btn-new"  id="btn-new-doc">＋ New Document</button>
+    </div>
+  </div>
+  <div class="lib-search" id="lib-search">
+    <div class="lq-box">
+      <span class="lq-ico" aria-hidden="true">
+        <svg viewBox="0 0 18 18" width="15" height="15" fill="none">
+          <circle cx="8" cy="8" r="5.4" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="12.2" y1="12.2" x2="16" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </span>
+      <input id="lib-q" type="text" autocomplete="off" spellcheck="false"
+        placeholder="Search by title, author, chapter, science, or text…" aria-label="Search documents">
+      <button class="lq-clear" id="lib-q-clear" aria-label="Clear search" style="display:none;">✕</button>
     </div>
   </div>
   <div class="ls-warn" id="ls-warn">
@@ -842,7 +784,6 @@ body.is-mobile #hk-badge{display:none!important;}
     <div class="save-pill" id="save-pill"><div class="save-dot"></div><span id="save-lbl">Saved</span></div>
     <button class="btn-tags" id="btn-tags">⟐ Sciences</button>
     <button class="btn-review" id="btn-review"><span id="review-lbl">Mark as Reviewed</span></button>
-    <button class="m-menu-btn" id="m-menu" aria-label="Document options">⋯</button>
   </div>
   <div class="edt-main">
     <aside class="sidebar">
@@ -975,75 +916,6 @@ body.is-mobile #hk-badge{display:none!important;}
     <button class="rev-cancel" id="rev-cancel">Cancel</button>
   </div>
 </div>
-
-<!-- ── MOBILE: keyboard color rail (block type + actions) ── -->
-<div id="kb-rail" aria-label="Block formatting">
-  <div class="kb-scroll" id="kb-scroll">
-    <button class="kb-type" data-type="note"   data-k><span class="kb-dot" style="background:#3A5040;border:1px solid #4A6050;"></span>Note</button>
-    <button class="kb-type" data-type="ayah"   data-k><span class="kb-dot" style="background:#D4A015;"></span>Āyah</button>
-    <button class="kb-type" data-type="hadith" data-k><span class="kb-dot" style="background:#3A9858;"></span>Ḥadīth</button>
-    <button class="kb-type" data-type="athar"  data-k><span class="kb-dot" style="background:#4878C8;"></span>Athar</button>
-    <button class="kb-type" data-type="title"  data-k><span class="kb-dot" style="background:#FEFCF5;border:1.5px solid rgba(176,190,168,.8);"></span>Title</button>
-    <span class="kb-div"></span>
-    <button class="kb-act" id="kb-add"  aria-label="Add block below">＋</button>
-    <button class="kb-act" id="kb-up"   aria-label="Move block up">↑</button>
-    <button class="kb-act" id="kb-down" aria-label="Move block down">↓</button>
-    <button class="kb-act" id="kb-del"  aria-label="Delete block">✕</button>
-    <button class="kb-act kb-done" id="kb-done" aria-label="Close keyboard">Done</button>
-  </div>
-</div>
-
-<!-- ── MOBILE: editor options sheet ── -->
-<div class="sheet-wrap" id="m-sheet-wrap">
-  <div class="sheet" id="m-sheet">
-    <div class="sheet-grip"></div>
-    <div class="sheet-title">Document options</div>
-
-    <button class="sheet-row" id="ms-review">
-      <span class="sheet-ico">◎</span>
-      <span class="sheet-lbl">Mark as reviewed<span class="sheet-sub" id="ms-review-sub">Spaced repetition</span></span>
-      <span class="sheet-chev">›</span>
-    </button>
-    <button class="sheet-row" id="ms-sciences">
-      <span class="sheet-ico">⟐</span>
-      <span class="sheet-lbl">Sciences<span class="sheet-sub" id="ms-sci-sub">Tag this document</span></span>
-      <span class="sheet-chev">›</span>
-    </button>
-
-    <div class="sheet-sec-lbl">First page layout</div>
-    <div class="seg" id="ms-pgtype">
-      <button class="seg-btn on" data-pt="chapter">Title page</button>
-      <button class="seg-btn"    data-pt="cont">Continuation</button>
-    </div>
-    <div class="sheet-pg" id="ms-pg-row" style="display:none;">
-      <span class="sheet-pg-lbl">Starting page number</span>
-      <input id="ms-pg-start" type="number" min="1" value="1" inputmode="numeric">
-    </div>
-
-    <button class="sheet-row gold" id="ms-print">
-      <span class="sheet-ico">⎙</span>
-      <span class="sheet-lbl">Print / Save as PDF<span class="sheet-sub">This document</span></span>
-      <span class="sheet-chev">›</span>
-    </button>
-    <button class="sheet-close" id="ms-close">Close</button>
-  </div>
-</div>
-
-<!-- ── MOBILE: library options sheet ── -->
-<div class="sheet-wrap" id="m-lib-wrap">
-  <div class="sheet" id="m-lib-sheet">
-    <div class="sheet-grip"></div>
-    <div class="sheet-title">Library</div>
-    <button class="sheet-row" id="ml-pdf"><span class="sheet-ico">⎙</span><span class="sheet-lbl">Export all as PDF<span class="sheet-sub">Every document</span></span><span class="sheet-chev">›</span></button>
-    <button class="sheet-row" id="ml-export"><span class="sheet-ico">⬇</span><span class="sheet-lbl">Export backup<span class="sheet-sub">Download JSON</span></span><span class="sheet-chev">›</span></button>
-    <button class="sheet-row" id="ml-import"><span class="sheet-ico">⬆</span><span class="sheet-lbl">Import backup<span class="sheet-sub">Restore from file</span></span><span class="sheet-chev">›</span></button>
-    <button class="sheet-row" id="ml-about"><span class="sheet-ico">◈</span><span class="sheet-lbl">About &amp; guide<span class="sheet-sub">How this works</span></span><span class="sheet-chev">›</span></button>
-    <button class="sheet-close" id="ml-close">Close</button>
-  </div>
-</div>
-
-<!-- ── MOBILE: new document button ── -->
-<button class="m-fab" id="m-fab" aria-label="New document">＋</button>
 
 <div class="toast" id="toast"></div>
 <div id="hk-badge"></div>
@@ -1253,6 +1125,46 @@ function showEditor(id){ currentDocId=id; loadDoc(id); document.getElementById('
 /* ══════════════════════════════════
    LIBRARY
 ══════════════════════════════════ */
+/* ══════════════════════════════════
+   SEARCH  (diacritic-insensitive,
+   ranks title > author/chapter >
+   science > body text)
+══════════════════════════════════ */
+let searchQuery='';
+function normSearch(s){
+  return (s||'').normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')   /* strip diacritics: ā→a, ḥ→h, ī→i … */
+    .replace(/[ʿʾʼʻ‘’`']/g,'')        /* strip ʿayn / hamza / apostrophes */
+    .toLowerCase();
+}
+function docHaystack(doc){
+  const sci=(doc.tags||[]).map(id=>{ const x=SCIENCES.find(s=>s.id===id); return x?x.label:''; }).join(' ');
+  const body=(doc.blocks||[]).map(b=>(b.html||'').replace(/<[^>]+>/g,' ')).join(' ')
+    .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&nbsp;/g,' ');
+  return { title:normSearch(doc.title), meta:normSearch((doc.author||'')+' '+(doc.chapter||'')),
+           sci:normSearch(sci), body:normSearch(body) };
+}
+function scoreDoc(doc, tokens){
+  if(!tokens.length) return 0;
+  const h=docHaystack(doc); let score=0;
+  for(const t of tokens){
+    let hit=0;
+    if(h.title.includes(t)) hit+=100;
+    if(h.meta.includes(t))  hit+=40;
+    if(h.sci.includes(t))   hit+=30;
+    if(h.body.includes(t))  hit+=8;
+    if(!hit) return 0;              /* every token must match somewhere */
+    score+=hit;
+  }
+  if(h.title===normSearch(tokens.join(' '))) score+=500;  /* exact-title bonus */
+  return score;
+}
+
+const libQ=document.getElementById('lib-q'), libQClear=document.getElementById('lib-q-clear');
+libQ.addEventListener('input',()=>{ searchQuery=libQ.value; libQClear.style.display=libQ.value?'flex':'none'; renderLibrary(); });
+libQClear.addEventListener('click',()=>{ libQ.value=''; searchQuery=''; libQClear.style.display='none'; renderLibrary(); libQ.focus(); });
+libQ.addEventListener('keydown',e=>{ if(e.key==='Escape'&&libQ.value){ e.preventDefault(); libQ.value=''; searchQuery=''; libQClear.style.display='none'; renderLibrary(); } });
+
 function renderLibrary(){
   const ORD={over:0,due:1,new:2,ok:3};
   const sortFn=(a,b)=>{
@@ -1263,6 +1175,9 @@ function renderLibrary(){
   };
   const all=DB.all();
   const body=document.getElementById('lib-body'); body.innerHTML='';
+
+  const searchBar=document.getElementById('lib-search');
+  if(searchBar) searchBar.style.display = all.length ? '' : 'none';
 
   if(!all.length){
     body.innerHTML=`<div class="empty-state">
@@ -1280,6 +1195,29 @@ function renderLibrary(){
       <div class="empty-sub">Create your first Islamic study note.<br>All documents are saved locally in your browser.</div>
       <button class="btn-new" style="margin:0 auto;" onclick="newDoc()">＋ New Document</button>
     </div>`;
+    return;
+  }
+
+  /* ── Search mode: flat, relevance-ranked results ── */
+  const q=(searchQuery||'').trim();
+  if(q){
+    const tokens=normSearch(q).split(/\s+/).filter(Boolean);
+    const scored=all.map(d=>({d,s:scoreDoc(d,tokens)})).filter(x=>x.s>0);
+    scored.sort((a,b)=> b.s-a.s || b.d.updatedAt-a.d.updatedAt);
+    const meta=document.createElement('div'); meta.className='search-meta';
+    meta.innerHTML=scored.length
+      ? `<em>${scored.length}</em> result${scored.length!==1?'s':''} for “${esc(q)}”`
+      : `No results for “${esc(q)}”`;
+    body.appendChild(meta);
+    if(scored.length){
+      const g=document.createElement('div'); g.className='cards-grid';
+      scored.forEach(x=>g.appendChild(mkCard(x.d)));
+      body.appendChild(g);
+    } else {
+      const es=document.createElement('div'); es.className='empty-state';
+      es.innerHTML=`<div class="empty-ttl">Nothing found</div><div class="empty-sub">Try a different title, author, science, or keyword.</div>`;
+      body.appendChild(es);
+    }
     return;
   }
 
@@ -1433,7 +1371,7 @@ function loadDoc(id){
   updateTagsButton(doc.tags||[]);
   syncMeta(); syncSep(); syncLabels(); layoutSched();
   const b1=document.getElementById('body-1'); if(b1) b1.classList.toggle('empty',b1.querySelectorAll('.block').length===0);
-  updateEditorBar(doc); setSaveState('saved'); syncMobilePageUI();
+  updateEditorBar(doc); setSaveState('saved'); syncMobilePageUI(); setReadOnly(MOBILE);
 }
 function saveCurrentDoc(){
   if(!currentDocId) return;
@@ -1712,26 +1650,30 @@ function caretEnd(el){ try{const r=document.createRange();r.selectNodeContents(e
 }());
 
 /* ══════════════════════════════════
-   MOBILE EXPERIENCE
+   MOBILE  —  READ-ONLY VIEWER
    ──────────────────────────────────
-   · phone detection + body.is-mobile
-   · single continuous page on phones
-   · frosted color rail above keyboard
-   · bottom sheets for sidebar actions
+   On phones the app is a reader only:
+   browse & search the library, open a
+   document, and read it. No editing,
+   creating, reordering, tagging,
+   reviewing, or layout controls.
 ══════════════════════════════════ */
 var MOBILE = false;
 const _mq = window.matchMedia('(max-width:768px)');
-const SUPPORTS_POINTER = 'PointerEvent' in window;
 
 function computeMobile(){
   return _mq.matches || (window.matchMedia('(pointer:coarse)').matches && window.innerWidth<=900);
+}
+function setReadOnly(ro){
+  document.querySelectorAll('#edt .block-text').forEach(el=>{ el.contentEditable = ro ? 'false' : 'true'; });
+  ['doc-title','doc-author','doc-chapter'].forEach(id=>{ const el=document.getElementById(id); if(el) el.contentEditable = ro ? 'false' : 'true'; });
 }
 function setMode(){
   const m = computeMobile();
   if(m===MOBILE) return;
   MOBILE = m;
   document.body.classList.toggle('is-mobile', MOBILE);
-  if(!MOBILE){ hideKbRail(); closeSheet('m-sheet-wrap'); closeSheet('m-lib-wrap'); }
+  setReadOnly(MOBILE);
   if(currentDocId && !document.getElementById('edt').classList.contains('off')){
     layoutLocked = false;
     doLayout();
@@ -1740,149 +1682,25 @@ function setMode(){
 if(_mq.addEventListener) _mq.addEventListener('change', setMode);
 else if(_mq.addListener) _mq.addListener(setMode);
 window.addEventListener('orientationchange', ()=>setTimeout(setMode,150));
-window.addEventListener('resize', ()=>{ setMode(); positionKbRail(); });
+window.addEventListener('resize', setMode);
 
-/* ── Single continuous page (phones) ── */
+/* Single continuous page on phones (nicer for reading) */
 function collapseToSinglePage(){
   const b1 = document.getElementById('body-1');
   if(!b1) return;
   const all = allBlocks();
   [...pages.querySelectorAll('.a4')].slice(1).forEach(p=>p.remove());
-  const ae = document.activeElement, isFB = ae && ae.classList && ae.classList.contains('block-text');
-  let fNode=null, fOff=0;
-  if(isFB){ const s=window.getSelection(); if(s&&s.focusNode){ fNode=s.focusNode; fOff=s.focusOffset; } }
   all.forEach(b=>{ if(b.parentNode!==b1) b1.appendChild(b); });
   syncMeta(); syncLabels();
   b1.classList.toggle('empty', b1.querySelectorAll('.block').length===0);
-  if(isFB && document.body.contains(ae)){
-    ae.focus({preventScroll:true});
-    if(fNode && document.body.contains(fNode)){
-      try{ const r=document.createRange(); const mx=fNode.nodeType===3?fNode.textContent.length:fNode.childNodes.length; r.setStart(fNode,Math.min(fOff,mx)); r.collapse(true); const s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
-      catch(_){ caretEnd(ae); }
-    }
-  }
 }
 
-/* ── Keyboard color rail ── */
-function showKbRail(){
-  if(!MOBILE) return;
-  const r = document.getElementById('kb-rail');
-  if(!r) return;
-  r.classList.add('show');
-  positionKbRail();
-}
-function hideKbRail(){
-  const r = document.getElementById('kb-rail');
-  if(!r) return;
-  r.classList.remove('show');
-  r.style.bottom = '';
-  r.style.paddingBottom = '';
-}
-function positionKbRail(){
-  const r = document.getElementById('kb-rail');
-  if(!r || !r.classList.contains('show')) return;
-  const vv = window.visualViewport;
-  if(!vv){ r.style.bottom='0px'; return; }
-  const overlap = Math.max(0, Math.round(window.innerHeight - (vv.height + vv.offsetTop)));
-  r.style.bottom = overlap + 'px';
-  r.style.paddingBottom = overlap>0 ? '0px' : '';
-}
-function updateKbActive(t){
-  document.querySelectorAll('#kb-rail .kb-type').forEach(b=>b.classList.toggle('on', b.dataset.type===t));
-}
-if(window.visualViewport){
-  window.visualViewport.addEventListener('resize', positionKbRail);
-  window.visualViewport.addEventListener('scroll', positionKbRail);
-}
-
-/* Tap helper: keep the soft keyboard open while running an action */
-function bindTool(el, fn){
-  if(!el) return;
-  if(SUPPORTS_POINTER){
-    el.addEventListener('pointerdown', e=>{ e.preventDefault(); fn(); });
-  } else {
-    el.addEventListener('mousedown', e=>e.preventDefault());
-    el.addEventListener('click', e=>{ e.preventDefault(); fn(); });
-  }
-}
-function refocus(){ if(focused){ const ed=focused.querySelector('.block-text'); if(ed) ed.focus(); } }
-
-document.querySelectorAll('#kb-rail .kb-type').forEach(btn=>{
-  bindTool(btn, ()=>{
-    if(!focused){ showToast('Tap a block first'); return; }
-    applyType(focused, btn.dataset.type);
-    refocus();
-  });
-});
-bindTool(document.getElementById('kb-add'),  ()=>{ focusB(insertB('note','',focused)); });
-bindTool(document.getElementById('kb-up'),   ()=>{ if(focused) moveB(focused,-1); });
-bindTool(document.getElementById('kb-down'), ()=>{ if(focused) moveB(focused,1); });
-bindTool(document.getElementById('kb-del'),  ()=>{ if(focused) delB(focused); });
-/* Done dismisses the keyboard, so let blur happen naturally */
-document.getElementById('kb-done').addEventListener('click', ()=>{
-  if(focused){ const ed=focused.querySelector('.block-text'); if(ed) ed.blur(); }
-  hideKbRail();
-});
-
-/* ── Bottom sheets ── */
-function openSheet(id){ const w=document.getElementById(id); if(w) w.classList.add('open'); }
-function closeSheet(id){ const w=document.getElementById(id); if(w) w.classList.remove('open'); }
-
-function syncMobilePageUI(){
-  const seg = document.getElementById('ms-pgtype');
-  if(seg) seg.querySelectorAll('.seg-btn').forEach(b=>b.classList.toggle('on', b.dataset.pt===pgType));
-  const pgRow = document.getElementById('ms-pg-row');
-  if(pgRow) pgRow.style.display = pgType==='cont' ? 'flex' : 'none';
-  const st = document.getElementById('ms-pg-start');
-  if(st && document.activeElement!==st) st.value = pgStart;
-}
-function updateMobileSubs(){
-  const doc = currentDocId ? DB.get(currentDocId) : null;
-  if(!doc) return;
-  const rs = document.getElementById('ms-review-sub');
-  if(rs) rs.textContent = SM2.label(doc.sr);
-  const ss = document.getElementById('ms-sci-sub');
-  if(ss){ const n=(doc.tags||[]).length; ss.textContent = n ? (n+' science'+(n!==1?'s':'')+' tagged') : 'Tag this document'; }
-}
-
-/* Editor options sheet */
-document.getElementById('m-menu').addEventListener('click', ()=>{
-  syncMobilePageUI(); updateMobileSubs(); openSheet('m-sheet-wrap');
-});
-document.getElementById('ms-review').addEventListener('click', ()=>{
-  closeSheet('m-sheet-wrap');
-  setTimeout(()=>document.getElementById('btn-review').click(), 260);
-});
-document.getElementById('ms-sciences').addEventListener('click', ()=>{
-  closeSheet('m-sheet-wrap');
-  setTimeout(()=>document.getElementById('btn-tags').click(), 260);
-});
-document.getElementById('ms-pgtype').querySelectorAll('.seg-btn').forEach(b=>{
-  b.addEventListener('click', ()=>applyPageType(b.dataset.pt));
-});
-document.getElementById('ms-pg-start').addEventListener('input', e=>applyPageStart(e.target.value));
-document.getElementById('ms-print').addEventListener('click', ()=>{
-  closeSheet('m-sheet-wrap');
-  setTimeout(()=>window.print(), 320);
-});
-document.getElementById('ms-close').addEventListener('click', ()=>closeSheet('m-sheet-wrap'));
-document.getElementById('m-sheet-wrap').addEventListener('click', e=>{
-  if(e.target===document.getElementById('m-sheet-wrap')) closeSheet('m-sheet-wrap');
-});
-
-/* Library options sheet */
-document.getElementById('m-lib-menu').addEventListener('click', ()=>openSheet('m-lib-wrap'));
-document.getElementById('ml-pdf').addEventListener('click', ()=>{ closeSheet('m-lib-wrap'); setTimeout(exportAllAsPDF,260); });
-document.getElementById('ml-export').addEventListener('click', ()=>{ closeSheet('m-lib-wrap'); document.getElementById('btn-export').click(); });
-document.getElementById('ml-import').addEventListener('click', ()=>{ closeSheet('m-lib-wrap'); document.getElementById('btn-import').click(); });
-document.getElementById('ml-about').addEventListener('click', ()=>{ closeSheet('m-lib-wrap'); document.getElementById('btn-about').click(); });
-document.getElementById('ml-close').addEventListener('click', ()=>closeSheet('m-lib-wrap'));
-document.getElementById('m-lib-wrap').addEventListener('click', e=>{
-  if(e.target===document.getElementById('m-lib-wrap')) closeSheet('m-lib-wrap');
-});
-
-/* New-document FAB */
-document.getElementById('m-fab').addEventListener('click', newDoc);
+/* No-ops: kept because shared editor code calls these on desktop too */
+function showKbRail(){}
+function hideKbRail(){}
+function positionKbRail(){}
+function updateKbActive(){}
+function syncMobilePageUI(){}
 
 /* Initialise mode once on load */
 setMode();
