@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>Fawāid — Islamic Study Notes</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='112' fill='%23243628'/%3E%3Crect x='150' y='150' width='212' height='212' fill='none' stroke='%23cdb06a' stroke-width='13'/%3E%3Crect x='150' y='150' width='212' height='212' fill='none' stroke='%23cdb06a' stroke-width='13' transform='rotate(45 256 256)'/%3E%3C/svg%3E">
 <style>
 /* Native system fonts — no network dependency, instant render */
 
@@ -643,6 +644,9 @@ body.is-mobile .fab-add{box-shadow:0 6px 18px -8px rgba(0,0,0,.5);}
 /* mobile drawer: more opaque so text stays legible over content behind */
 body.is-mobile .sidebar{background:linear-gradient(168deg,rgba(20,30,24,.86),rgba(12,18,14,.84));
   -webkit-backdrop-filter:blur(24px) saturate(1.3);backdrop-filter:blur(24px) saturate(1.3);}
+/* mobile: real pagination — pages fit content, last page clears the + button */
+body.is-mobile .a4 .page-body{min-height:auto!important;}
+body.is-mobile .pages-cnt{padding-bottom:calc(96px + env(safe-area-inset-bottom));}
 </style>
 </head>
 <body>
@@ -1675,14 +1679,17 @@ document.addEventListener('keydown',e=>{
    Early exit if distribution unchanged
 ══════════════════════════════════ */
 const PGN=870; let layoutTimer;
+function mobileLim(first){ var a4=pages.querySelector(".a4"); var w=a4?a4.clientWidth:Math.min(window.innerWidth-28,640); var paper=w*1.414; return Math.max(380, paper-(first?200:96)); }
 function layoutSched(){ clearTimeout(layoutTimer); layoutTimer=setTimeout(()=>requestAnimationFrame(doLayout),200); }
 function doLayout(){
   if(layoutLocked) return;
-  if(MOBILE){ collapseToSinglePage(); return; }
+  /* mobile now paginates like desktop (dynamic page height) */
   const all=allBlocks(); if(all.length) all[0].getBoundingClientRect();
   const hts=all.map(b=>b.offsetHeight+3);
   const dist=[[]]; let acc=0;
-  hts.forEach((h,i)=>{ const lim=dist.length===1?(pgType==='cont'?PGN:712):PGN; if(acc>0&&acc+h>lim){dist.push([]);acc=0;} dist[dist.length-1].push(all[i]); acc+=h; });
+  const baseLim=MOBILE?mobileLim(false):PGN;
+  const firstLim=MOBILE?mobileLim(true):(pgType==='cont'?PGN:712);
+  hts.forEach((h,i)=>{ const lim=dist.length===1?firstLim:baseLim; if(acc>0&&acc+h>lim){dist.push([]);acc=0;} dist[dist.length-1].push(all[i]); acc+=h; });
   const need=Math.max(1,dist.length);
   const curB=[...document.querySelectorAll('.page-body')];
   if(curB.length===need){ const same=dist.every((blks,pi)=>{ const cb=[...curB[pi].children].filter(c=>c.classList.contains('block')); return cb.length===blks.length&&blks.every((b,j)=>b===cb[j]); }); if(same) return; }
