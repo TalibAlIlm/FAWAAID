@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>FAWĀID</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20512%20512'%3E%20%3Cdefs%3E%20%3CradialGradient%20id='bg'%20cx='50%25'%20cy='36%25'%20r='80%25'%3E%20%3Cstop%20offset='0'%20stop-color='%2317271C'/%3E%3Cstop%20offset='1'%20stop-color='%230A120D'/%3E%20%3C/radialGradient%3E%20%3ClinearGradient%20id='st'%20x1='0'%20y1='0'%20x2='0'%20y2='1'%3E%20%3Cstop%20offset='0'%20stop-color='%237FC594'/%3E%3Cstop%20offset='.55'%20stop-color='%234CA06C'/%3E%3Cstop%20offset='1'%20stop-color='%2333804F'/%3E%20%3C/linearGradient%3E%20%3C/defs%3E%20%3Crect%20width='512'%20height='512'%20rx='120'%20fill='url%28%23bg%29'/%3E%20%3Crect%20x='16'%20y='16'%20width='480'%20height='480'%20rx='104'%20fill='none'%20stroke='%236EB283'%20stroke-opacity='.16'%20stroke-width='3'/%3E%20%3Cg%20transform='translate%28256%20256%29'%3E%20%3Cg%20fill='%236EB283'%20fill-opacity='.09'%3E%20%3Crect%20x='-116'%20y='-116'%20width='232'%20height='232'%20rx='10'/%3E%20%3Crect%20x='-116'%20y='-116'%20width='232'%20height='232'%20rx='10'%20transform='rotate%2845%29'/%3E%20%3C/g%3E%20%3Cg%20fill='none'%20stroke='url%28%23st%29'%20stroke-width='17'%20stroke-linejoin='miter'%20stroke-miterlimit='6'%3E%20%3Crect%20x='-116'%20y='-116'%20width='232'%20height='232'%20rx='6'/%3E%20%3Crect%20x='-116'%20y='-116'%20width='232'%20height='232'%20rx='6'%20transform='rotate%2845%29'/%3E%20%3C/g%3E%20%3Ccircle%20r='30'%20fill='url%28%23st%29'/%3E%20%3Ccircle%20r='30'%20fill='none'%20stroke='%230A120D'%20stroke-opacity='.35'%20stroke-width='4'/%3E%20%3Ccircle%20r='11'%20fill='%230A120D'%20fill-opacity='.4'/%3E%20%3C/g%3E%20%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20512%20512%22%3E%3Cdefs%3E%3CradialGradient%20id%3D%22bg%22%20cx%3D%2250%25%22%20cy%3D%2236%25%22%20r%3D%2280%25%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%2317271C%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230A120D%22%2F%3E%3C%2FradialGradient%3E%3ClinearGradient%20id%3D%22st%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%237FC594%22%2F%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%234CA06C%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2333804F%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%22512%22%20height%3D%22512%22%20rx%3D%22112%22%20fill%3D%22url%28%23bg%29%22%2F%3E%3Crect%20x%3D%22150%22%20y%3D%22150%22%20width%3D%22212%22%20height%3D%22212%22%20fill%3D%22none%22%20stroke%3D%22url%28%23st%29%22%20stroke-width%3D%2213%22%2F%3E%3Crect%20x%3D%22150%22%20y%3D%22150%22%20width%3D%22212%22%20height%3D%22212%22%20fill%3D%22none%22%20stroke%3D%22url%28%23st%29%22%20stroke-width%3D%2213%22%20transform%3D%22rotate%2845%20256%20256%29%22%2F%3E%3C%2Fsvg%3E">
 <style>
 /* Native system fonts — no network dependency, instant render */
 
@@ -911,6 +911,16 @@ body.is-mobile .fab-add{
   background:rgba(90,158,114,.12)!important;
   color:var(--st)!important;
 }
+
+/* ═══════════════════════════════════════
+   GERMAN — CSS ::before PLACEHOLDERS
+   The empty-page prompt lives in CSS
+   content, unreachable by the JS
+   translator, so lang-scoped overrides
+   supply the German wording here.
+═══════════════════════════════════════ */
+html[lang="de"] .page-body.empty::before{content:'Füge einen Vers, eine Überlieferung oder einen Nutzen hinzu — drücke  Alt + +  zum Beginnen.';}
+html[lang="de"] body.is-mobile .page-body.empty::before{content:'Tippe auf  + , um deinen ersten Block hinzuzufügen.';}
 </style>
 </head>
 <body>
@@ -1177,10 +1187,13 @@ const T={
   phTitle:"e.g. Kitāb at-Tawḥīd", phAuthor:"e.g. Ibn ʿAbd al-Wahhāb", phChapter:"e.g. Chapter 1",
   pgTitle:"Title Page", pgTitleSub:"Ornament header", pgCont:"Continuation", pgContSub:"Minimal header",
   lsAyah:"Quranic Verse", lsHadith:"Prophetic Narration", lsAthar:"Scholar Commentary", lsNote:"Personal Analysis", lsTitle:"Chapter / Part heading",
+  lnAyah:"Āyah", lnHadith:"Ḥadīth", lnAthar:"Athar / Sharḥ", lnNote:"Note", lnTitle:"Section Title",
   active:"Active:\u00a0", addBlock:"Add Block", printPdf:"Print / Save as PDF", drTags:"Sciences / Tags", drReview:"Mark as Reviewed",
   scNew:"New block", scAdd:"Add block (anywhere)", scBreak:"Line break", scDel:"Delete empty", scReorder:"Reorder", scCycle:"Cycle type (mouse)",
   sbFoot:"Alt = Option on Mac · بارك الله فيك",
   phDocTitle:"Book Title", phDocAuthor:"Author", phDocChapter:"Chapter",
+  phbAyah:"Enter Quranic verse…", phbHadith:"Enter Ḥadīth narration…", phbAthar:"Enter scholar commentary…", phbNote:"Enter your analysis or notes…", phbTitle:"Enter section title…",
+  ttCycle:"Click to cycle type", ttUp:"Move up (Shift+↑)", ttDown:"Move down (Shift+↓)", ttDelete:"Delete",
   tagTtl:"Which Islamic sciences does this document cover?", tagSub:"Select all that apply — you can edit this anytime using the ⟐ Sciences button.",
   tagSkip:"Skip for now", tagSave:"Save Sciences →",
   revQ:"How well did you retain this material?", revInfoFirst:"First review — rate your confidence honestly.",
@@ -1217,10 +1230,13 @@ const T={
   phTitle:"z. B. Kitāb at-Tawḥīd", phAuthor:"z. B. Ibn ʿAbd al-Wahhāb", phChapter:"z. B. Kapitel 1",
   pgTitle:"Titelseite", pgTitleSub:"Verzierter Kopf", pgCont:"Fortsetzung", pgContSub:"Minimaler Kopf",
   lsAyah:"Koranvers", lsHadith:"Prophetische Überlieferung", lsAthar:"Gelehrtenkommentar", lsNote:"Eigene Analyse", lsTitle:"Kapitel-/Abschnittsüberschrift",
+  lnAyah:"Āyah", lnHadith:"Ḥadīth", lnAthar:"Athar / Sharḥ", lnNote:"Notiz", lnTitle:"Abschnittstitel",
   active:"Aktiv:\u00a0", addBlock:"Block hinzufügen", printPdf:"Drucken / als PDF speichern", drTags:"Wissenschaften / Tags", drReview:"Als wiederholt markieren",
   scNew:"Neuer Block", scAdd:"Block hinzufügen (überall)", scBreak:"Zeilenumbruch", scDel:"Leeren löschen", scReorder:"Umordnen", scCycle:"Typ wechseln (Maus)",
   sbFoot:"Alt = Option am Mac · بارك الله فيك",
   phDocTitle:"Buchtitel", phDocAuthor:"Autor", phDocChapter:"Kapitel",
+  phbAyah:"Koranvers eingeben…", phbHadith:"Ḥadīth-Überlieferung eingeben…", phbAthar:"Gelehrtenkommentar eingeben…", phbNote:"Deine Analyse oder Notizen eingeben…", phbTitle:"Abschnittstitel eingeben…",
+  ttCycle:"Zum Wechseln des Typs klicken", ttUp:"Nach oben (Umschalt+↑)", ttDown:"Nach unten (Umschalt+↓)", ttDelete:"Löschen",
   tagTtl:"Welche islamischen Wissenschaften behandelt dieses Dokument?", tagSub:"Wähle alles Zutreffende — du kannst dies jederzeit über die Schaltfläche ⟐ Wissenschaften ändern.",
   tagSkip:"Vorerst überspringen", tagSave:"Wissenschaften speichern →",
   revQ:"Wie gut hast du diesen Stoff behalten?", revInfoFirst:"Erste Wiederholung — bewerte dein Können ehrlich.",
@@ -1244,6 +1260,9 @@ const T={
   lastReviewed:"Zuletzt wiederholt:", rep:"Wdh.", ease:"Faktor", untitledShort:"Unbenannt"}
 };
 function tr(k){ return (T[LANG]&&T[LANG][k]!=null)?T[LANG][k]:(T.en[k]!=null?T.en[k]:k); }
+/* Translated grey placeholder + label for each block type */
+function blockPh(type){ const m={ayah:'phbAyah',hadith:'phbHadith',athar:'phbAthar',note:'phbNote',title:'phbTitle'}; return tr(m[type]||'phbNote'); }
+function typeLabel(type){ const m={ayah:'lnAyah',hadith:'lnHadith',athar:'lnAthar',note:'lnNote',title:'lnTitle'}; return tr(m[type]||'lnNote'); }
 
 
 /* ══════════════════════════════════
@@ -1370,7 +1389,7 @@ function normDoc(d){
   if(!d || typeof d!=='object') d={};
   d.id = (typeof d.id==='string' && d.id) ? d.id
        : 'doc_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
-  d.title=typeof d.title==='string'?d.title:''; 
+  d.title=typeof d.title==='string'?d.title:'';
   d.author=typeof d.author==='string'?d.author:'';
   d.chapter=typeof d.chapter==='string'?d.chapter:'';
   d.pageType = d.pageType==='cont' ? 'cont' : 'chapter';
@@ -1805,29 +1824,29 @@ function maybeReviewThenLeave(firstClose){
 const TYPES={note:{label:'Note',ph:'Enter your analysis or notes…',dot:'#3A5040'},title:{label:'Section Title',ph:'Enter section title…',dot:'#469E68'},ayah:{label:'Āyah',ph:'Enter Quranic verse…',dot:'#D4A015'},hadith:{label:'Ḥadīth',ph:'Enter Ḥadīth narration…',dot:'#3A9858'},athar:{label:'Athar / Sharḥ',ph:'Enter scholar commentary…',dot:'#4878C8'}};
 const CYCLE=['note','ayah','hadith','athar','title'];
 let focused=null,lastBlock=null,blkSeq=0,layoutLocked=false;
-function setInd(t){ const c=TYPES[t]||TYPES.note; cVal.textContent=c.label; cDot.style.background=c.dot; cDot.style.boxShadow='0 0 8px '+c.dot+'66'; }
+function setInd(t){ const c=TYPES[t]||TYPES.note; cVal.textContent=typeLabel(t in TYPES?t:'note'); cDot.style.background=c.dot; cDot.style.boxShadow='0 0 8px '+c.dot+'66'; }
 function clearInd(){ cVal.textContent='—'; cDot.style.background='var(--sb)'; cDot.style.boxShadow='none'; }
 function setLeg(t){ document.querySelectorAll('.leg').forEach(l=>l.classList.toggle('on',l.dataset.type===t)); updateKbActive(t); }
 function applyType(block,t){
   if(!TYPES[t]||!block) return;
-  block.dataset.type=t; block.querySelector('.block-text').dataset.ph=TYPES[t].ph;
+  block.dataset.type=t; block.querySelector('.block-text').dataset.ph=blockPh(t);
   setLeg(t); setInd(t);
   block.classList.remove('flashed'); void block.offsetWidth; block.classList.add('flashed');
-  badge.textContent=TYPES[t].label; badge.classList.remove('show'); void badge.offsetWidth; badge.classList.add('show');
+  badge.textContent=typeLabel(t); badge.classList.remove('show'); void badge.offsetWidth; badge.classList.add('show');
   badge.addEventListener('animationend',()=>badge.classList.remove('show'),{once:true});
-  showToast('→ '+TYPES[t].label); scheduleSave();
+  showToast('→ '+typeLabel(t)); scheduleSave();
 }
 const FSVG=`<svg class="fo" viewBox="0 0 50 12" width="50" height="12" fill="none"><line x1="0" y1="6" x2="18" y2="6" stroke="#469E68" stroke-width=".6" opacity=".6"/><path d="M25,2 L29,6 L25,10 L21,6 Z" stroke="#469E68" stroke-width=".7" fill="#B0BEA8" fill-opacity=".12"/><line x1="32" y1="6" x2="50" y2="6" stroke="#469E68" stroke-width=".6" opacity=".6"/></svg>`;
 function mkBlock(type,html){
   type=type||'note'; blkSeq++;
   const w=document.createElement('div'); w.className='block'; w.dataset.type=type;
-  const bar=document.createElement('div'); bar.className='bar'; bar.title='Click to cycle type';
+  const bar=document.createElement('div'); bar.className='bar'; bar.title=tr('ttCycle');
   bar.addEventListener('mousedown',e=>{ e.preventDefault(); applyType(w,CYCLE[(CYCLE.indexOf(w.dataset.type)+1)%CYCLE.length]); w.querySelector('.block-text').focus(); });
-  const ed=document.createElement('div'); ed.className='block-text'; ed.contentEditable='true'; ed.dir='auto'; ed.spellcheck=true; ed.dataset.ph=TYPES[type].ph; if(html) ed.innerHTML=html;
+  const ed=document.createElement('div'); ed.className='block-text'; ed.contentEditable='true'; ed.dir='auto'; ed.spellcheck=true; ed.dataset.ph=blockPh(type); if(html) ed.innerHTML=html;
   ed.addEventListener('paste',e=>{ e.preventDefault(); const txt=(e.clipboardData||window.clipboardData).getData('text/plain'); document.execCommand('insertText',false,txt); });
   const tools=document.createElement('div'); tools.className='block-tools';
   const mkb=(ico,tip,fn)=>{ const b=document.createElement('button'); b.className='bt'; b.title=tip; b.textContent=ico; b.addEventListener('mousedown',e=>{e.preventDefault();fn();}); return b; };
-  tools.append(mkb('↑','Move up (Shift+↑)',()=>moveB(w,-1)),mkb('↓','Move down (Shift+↓)',()=>moveB(w,1)),mkb('✕','Delete',()=>delB(w)));
+  tools.append(mkb('↑',tr('ttUp'),()=>moveB(w,-1)),mkb('↓',tr('ttDown'),()=>moveB(w,1)),mkb('✕',tr('ttDelete'),()=>delB(w)));
   w.append(bar,ed,tools);
   ed.addEventListener('focus',()=>{ if(focused&&focused!==w) focused.classList.remove('focused'); focused=w; lastBlock=w; w.classList.add('focused'); setLeg(w.dataset.type); setInd(w.dataset.type); showKbRail(); });
   ed.addEventListener('blur',()=>{ setTimeout(()=>{ if(focused===w){w.classList.remove('focused');focused=null;clearInd();setLeg(null);hideKbRail();}},150); });
@@ -2175,6 +2194,8 @@ function applyLang(lang){
   { const b=byId('pgt-ch'); if(b){ if(b.firstChild&&b.firstChild.nodeType===3)b.firstChild.nodeValue=tr('pgTitle'); const s=b.querySelector('.pgt-sub'); if(s)s.textContent=tr('pgTitleSub'); } }
   { const b=byId('pgt-co'); if(b){ if(b.firstChild&&b.firstChild.nodeType===3)b.firstChild.nodeValue=tr('pgCont'); const s=b.querySelector('.pgt-sub'); if(s)s.textContent=tr('pgContSub'); } }
   { const m={ayah:'lsAyah',hadith:'lsHadith',athar:'lsAthar',note:'lsNote',title:'lsTitle'}; Object.keys(m).forEach(ty=>{const e=$('.leg[data-type="'+ty+'"] .ls'); if(e)e.textContent=tr(m[ty]);}); }
+  /* Legend main labels (Note → Notiz, Section Title → Abschnittstitel) */
+  { const m={ayah:'lnAyah',hadith:'lnHadith',athar:'lnAthar',note:'lnNote',title:'lnTitle'}; Object.keys(m).forEach(ty=>{const e=$('.leg[data-type="'+ty+'"] .ln'); if(e)e.textContent=tr(m[ty]);}); }
   { const c=$('.cur-lbl'); if(c)c.textContent=tr('active'); }
   setBtn('btn-add','addBlock',true); setBtn('btn-print','printPdf',true); setBtn('dr-tags','drTags',true); setBtn('dr-review','drReview',true);
   { const sc=$$('.scts .sct-l'),scK=['scNew','scAdd','scBreak','scDel','scReorder',null,null,null,null,null,'scCycle']; sc.forEach((e,i)=>{ if(scK[i])e.textContent=tr(scK[i]); }); }
@@ -2184,10 +2205,18 @@ function applyLang(lang){
   { const rq=$('.rev-q'); if(rq)rq.textContent=tr('revQ'); }
   { const rl=$$('.rating-btn .r-label'),k=['rForgot','rHard','rGood','rEasy']; rl.forEach((e,i)=>{ if(k[i])e.textContent=tr(k[i]); }); }
   setTxt('rev-cancel','cancel');
+  /* Existing blocks in the open editor: refresh ghost placeholders + tooltips */
+  document.querySelectorAll('#edt .block').forEach(b=>{
+    const ed=b.querySelector('.block-text'); if(ed)ed.dataset.ph=blockPh(b.dataset.type);
+    const bar=b.querySelector('.bar'); if(bar)bar.title=tr('ttCycle');
+    const bts=b.querySelectorAll('.bt');
+    if(bts[0])bts[0].title=tr('ttUp'); if(bts[1])bts[1].title=tr('ttDown'); if(bts[2])bts[2].title=tr('ttDelete');
+  });
   /* refresh dynamic views */
   try{
     const sp=byId('save-pill'); if(sp) setSaveState(sp.classList.contains('saving')?'saving':'saved');
     if(typeof currentDocId!=='undefined' && currentDocId){ const d=DB.get(currentDocId); if(d){ updateTagsButton(d.tags||[]); updateEditorBar(d); } }
+    if(typeof focused!=='undefined' && focused){ setInd(focused.dataset.type); }
     syncLabels();
     if(!byId('lib').classList.contains('off')) renderLibrary();
   }catch(_){}
